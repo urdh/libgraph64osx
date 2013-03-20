@@ -1,6 +1,7 @@
-*Note:* This is essentially a reverse-engineered API-compatible OS X (Quartz/Cocoa) variant of the [libgraph64](http://www.math.chalmers.se/Math/Grundutb/CTH/tma881/1213/Assignments/THREADS/graphics.html) graphics library used in the High Performance Computing course given at Chalmers University of Technology. This is therefore basically a verbatim transcription of the desciption of that library, sans the (sort of irrelevant) X library text.
+**Note:** This is essentially a reverse-engineered API-compatible OS X (Quartz/Cocoa) variant of the [libgraph64](http://www.math.chalmers.se/Math/Grundutb/CTH/tma881/1213/Assignments/THREADS/graphics.html) graphics library used in the High Performance Computing course given at Chalmers University of Technology. This is therefore basically a verbatim transcription of the desciption of that library, sans the (sort of irrelevant) X library text.
 
 # A small graphics package
+**Changes in behaviour compared to the original library** include `CloseWindow` not waiting for the letter `q`, instead waiting for the user to close the window, and the application not drawing anything (the run loop doesn't run) until `CloseWindow` is called.
 
 ## Colours
 For simplicity there are only given you eight colours to work with. The colours are numbered from 0 to 7, and they are _black_, _white_, _red_, _green_, _blue_, _cyan_, _magenta_ and _yellow_.
@@ -17,7 +18,7 @@ The prototypes are available in `defs.h`.
 Open a window. The size of the window is given by `width` and `height`: `width` is the number of columns and `height` is the number of rows. Call this routine before drawing anything. You cannot open more than one window, so do not make repeated calls to `OpenWindow`.
 
 ### `void CloseWindow()`
-This should be the last call to the graphics library. It will wait for the user to type the letter `q` in the window. It will then close the window.
+This should be the last call to the graphics library.
 
 ### `void FlushWindow()`
 Call this routine when to flush the window, making sure that everything has drawn.
@@ -28,7 +29,7 @@ Draw a whole line of pixels in row `y`. The array `line` should contain colour v
 ### `void DrawPoint(int x, int y, int color)`
 Draw one point at coordinates `(x, y)` with colour `color`.
 
-### `void WaitForButton(int *x, int *y, int *button)`
+### `void WaitForButton(int *x, int *y, int *button)` (not implemented)
 This routine waits for a mouse click. It returns the position of the click and the button that was used (`1` = left button, `2` = middle button, `3` = right button). Note `*`. This routine can be used to implement a zoom option, for example.
 
 ## Sample program
@@ -65,6 +66,7 @@ This routine waits for a mouse click. It returns the position of the click and t
     }
 
 ## Compiling the library
+Compiling the library should be as easy as running `make all`. That will get you a shared library file `libgraph64osx.dylib` to link against.
 
 ## Using the library
-
+Include `defs.h` in your C program, use the functions as described above. Compile with the `-lgraph64osx` flag, assuming the compiler knows where to find `libgraph64osx.dylib`.
