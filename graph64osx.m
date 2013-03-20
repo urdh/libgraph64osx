@@ -70,7 +70,11 @@ void DrawCircle(int x, int y, int radius, int color)
 {
   // Is this assertion correct?
   assert(x >= 0 && x < gWidth && y >= 0 && y < gHeight);
-  assert(false && "Not yet implemented!");
+  CGContextBeginPath(gContext);
+  CGContextAddArc(gContext, x, y, radius, 0, 2*M_PI, 1);
+  CGContextClosePath(gContext);
+  CGContextSetLineWidth(gContext, 1.0f);
+  CGContextStrokePath(gContext);
 }
 
 void WaitForButton(int *x, int *y, int *button)
@@ -82,7 +86,7 @@ void DrawRectangle(int x, int y, int width, int height)
 {
   assert(x >= 0 && x < gWidth && y >= 0 && y < gHeight);
   assert(x + width < gWidth && y + height < gHeight);
-  CGContextStrokeRectWithWidth(gContext, CGRectMake(x,y,width,height), 1f);
+  CGContextStrokeRectWithWidth(gContext, CGRectMake(x,y,width,height), 1.0f);
 }
 
 void FillRectangle(int x, int y, int width, int height)
@@ -96,34 +100,38 @@ void SetColor(int color)
 {
   assert(gContext != nil);
   assert(color >= 0 && color <= 7);
+  CGColorRef cgColor;
   switch(color) {
     case 0: // Black
-      CGContextSetRGBFillColor(gContext, 0, 0, 0, 1);
+      cgColor = CGColorCreateGenericRGB(0, 0, 0, 1);
       break;
     case 1: // White
-      CGContextSetRGBFillColor(gContext, 1, 1, 1, 1);
+      cgColor = CGColorCreateGenericRGB(1, 1, 1, 1);
       break;
     case 2: // Red
-      CGContextSetRGBFillColor(gContext, 1, 0, 0, 1);
+      cgColor = CGColorCreateGenericRGB(1, 0, 0, 1);
       break;
     case 3: // Green
-      CGContextSetRGBFillColor(gContext, 0, 1, 0, 1);
+      cgColor = CGColorCreateGenericRGB(0, 1, 0, 1);
       break;
     case 4: // Blue
-      CGContextSetRGBFillColor(gContext, 0, 0, 1, 1);
+      cgColor = CGColorCreateGenericRGB(0, 0, 1, 1);
       break;
     case 5: // Cyan
-      CGContextSetRGBFillColor(gContext, 0, 1, 1, 1);
+      cgColor = CGColorCreateGenericRGB(0, 1, 1, 1);
       break;
     case 6: // Magenta
-      CGContextSetRGBFillColor(gContext, 1, 0, 1, 1);
+      cgColor = CGColorCreateGenericRGB(1, 0, 1, 1);
       break;
     case 7: // Yellow
-      CGContextSetRGBFillColor(gContext, 1, 1, 0, 1);
+      cgColor = CGColorCreateGenericRGB(1, 1, 0, 1);
       break;
     default:
+      cgColor = CGColorCreateGenericRGB(0, 0, 0, 0);
       break;
   }
+  CGContextSetFillColorWithColor(gContext, cgColor);
+  CGContextSetStrokeColorWithColor(gContext, cgColor);
 }
 
 void FillArc(int x, int y, int width, int height, int angle1, int angle2)
