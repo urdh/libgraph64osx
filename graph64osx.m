@@ -69,23 +69,26 @@ void DrawCircle(int x, int y, int radius, int color)
 {
   // Is this assertion correct?
   assert(x >= 0 && x < gWidth && y >= 0 && y < gHeight);
+  assert(false && "Not yet implemented!");
 }
 
 void WaitForButton(int *x, int *y, int *button)
 {
-  
+  assert(false && "Not yet implemented!");
 }
 
 void DrawRectangle(int x, int y, int width, int height)
 {
   // Is this assertion correct?
   assert(x >= 0 && x < gWidth && y >= 0 && y < gHeight);
+  assert(false && "Not yet implemented!");
 }
 
 void FillRectangle(int x, int y, int width, int height)
 {
   // Is this assertion correct?
   assert(x >= 0 && x < gWidth && y >= 0 && y < gHeight);
+  assert(false && "Not yet implemented!");
 }
 
 void SetColor(int color)
@@ -126,4 +129,5 @@ void FillArc(int x, int y, int width, int height, int angle1, int angle2)
 {
   // Is this assertion correct?
   assert(x >= 0 && x < gWidth && y >= 0 && y < gHeight);
+  assert(false && "Not yet implemented!");
 }
