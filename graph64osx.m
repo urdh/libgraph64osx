@@ -51,13 +51,18 @@ void FlushWindow()
 void DrawLine(int y, int line[])
 {
   assert(y >= 0 && y < gHeight);
+  for(int x=0; x < gWidth; x++)
+  {
+    DrawPoint(x, y, line[x]);
+  }
 }
-
-//getcolor?
 
 void DrawPoint(int x, int y, int color)
 {
+  assert(gContext != nil);
   assert(x >= 0 && x < gWidth && y >= 0 && y < gHeight);
+  SetColor(color);
+  CGContextFillRect(gContext, CGRectMake(x,y,1,1));
 }
 
 void DrawCircle(int x, int y, int radius, int color)
@@ -85,6 +90,7 @@ void FillRectangle(int x, int y, int width, int height)
 
 void SetColor(int color)
 {
+  assert(gContext != nil);
   assert(color >= 0 && color <= 7);
   switch(color) {
     case 0: // Black
