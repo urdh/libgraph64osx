@@ -1,11 +1,13 @@
 #include "assert.h"
 #import <Foundation/NSAutoreleasePool.h>
+#import <AppKit/NSGraphicsContext.h>
 #import <AppKit/NSApplication.h>
 #import <AppKit/NSWindow.h>
 #import "defs.h"
 
 NSAutoreleasePool* G64XPool;
 NSWindow* gWindow;
+CGContextRef gContext;
 int gWidth, gHeight;
 
 @interface G64XQuitApp : NSObject {}
@@ -29,7 +31,7 @@ void OpenWindow(int width, int height)
                                styleMask:NSTitledWindowMask|NSClosableWindowMask backing:NSBackingStoreBuffered defer:NO] autorelease];
   [gWindow setTitle:@"Graph64 OS X Window"];
   [gWindow makeKeyAndOrderFront:nil];
-  // http://developer.apple.com/library/mac/#documentation/GraphicsImaging/Conceptual/drawingwithquartz2d/dq_context/dq_context.html#//apple_ref/doc/uid/TP30001066-CH203-CJBDCHAC
+  gContext = [[NSGraphicsContext graphicsContextWithWindow:gWindow] graphicsPort];
 }
 
 void CloseWindow()
@@ -42,7 +44,8 @@ void CloseWindow()
 
 void FlushWindow()
 {
-  
+  assert(gContext != nil);
+  CGContextFlush(gContext);
 }
 
 void DrawLine(int y, int line[])
@@ -83,6 +86,34 @@ void FillRectangle(int x, int y, int width, int height)
 void SetColor(int color)
 {
   assert(color >= 0 && color <= 7);
+  switch(color) {
+    case 0: // Black
+      CGContextSetRGBFillColor(gContext, 0, 0, 0, 1);
+      break;
+    case 1: // White
+      CGContextSetRGBFillColor(gContext, 1, 1, 1, 1);
+      break;
+    case 2: // Red
+      CGContextSetRGBFillColor(gContext, 1, 0, 0, 1);
+      break;
+    case 3: // Green
+      CGContextSetRGBFillColor(gContext, 0, 1, 0, 1);
+      break;
+    case 4: // Blue
+      CGContextSetRGBFillColor(gContext, 0, 0, 1, 1);
+      break;
+    case 5: // Cyan
+      CGContextSetRGBFillColor(gContext, 0, 1, 1, 1);
+      break;
+    case 6: // Magenta
+      CGContextSetRGBFillColor(gContext, 1, 0, 1, 1);
+      break;
+    case 7: // Yellow
+      CGContextSetRGBFillColor(gContext, 1, 1, 0, 1);
+      break;
+    default:
+      break;
+  }
 }
 
 void FillArc(int x, int y, int width, int height, int angle1, int angle2)
