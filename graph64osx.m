@@ -1,3 +1,4 @@
+// Part of the libgraph64osx library. See LICENSE.md for licensing details.
 #include "assert.h"
 #import <Foundation/NSAutoreleasePool.h>
 #import <AppKit/NSGraphicsContext.h>
@@ -24,7 +25,7 @@ void OpenWindow(int width, int height)
 {
   assert(width > 0 && height > 0);
   gWidth = width; gHeight = height;
-  NSAutoreleasePool* gPool = [[NSAutoreleasePool alloc] init];
+  gPool = [[NSAutoreleasePool alloc] init];
   [NSApplication sharedApplication];
   [NSApp finishLaunching];
   gWindow = [[[NSWindow alloc] initWithContentRect:NSMakeRect(0, 0, gWidth, gHeight)

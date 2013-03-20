@@ -1,3 +1,4 @@
+// Part of the libgraph64osx library. See LICENSE.md for licensing details.
 void OpenWindow(int width, int height);
 void CloseWindow();
 void FlushWindow();
