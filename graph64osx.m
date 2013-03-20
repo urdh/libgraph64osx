@@ -80,16 +80,16 @@ void WaitForButton(int *x, int *y, int *button)
 
 void DrawRectangle(int x, int y, int width, int height)
 {
-  // Is this assertion correct?
   assert(x >= 0 && x < gWidth && y >= 0 && y < gHeight);
-  assert(false && "Not yet implemented!");
+  assert(x + width < gWidth && y + height < gHeight);
+  CGContextStrokeRectWithWidth(gContext, CGRectMake(x,y,width,height), 1f);
 }
 
 void FillRectangle(int x, int y, int width, int height)
 {
-  // Is this assertion correct?
   assert(x >= 0 && x < gWidth && y >= 0 && y < gHeight);
-  assert(false && "Not yet implemented!");
+  assert(x + width < gWidth && y + height < gHeight);
+  CGContextFillRect(gContext, CGRectMake(x,y,width,height));
 }
 
 void SetColor(int color)
