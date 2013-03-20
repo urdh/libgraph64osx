@@ -1,10 +1,20 @@
-.PHONY: all test
+# Part of the libgraph64osx library. See LICENSE.md for licensing details.
+CC=clang
+CCFLAGS=-c -Wall -m64 -Os -O3 -O4 -ObjC
+LDFLAGS=-dynamiclib -framework AppKit -framework Foundation
+LIBRARY=libgraph64osx.dylib
+SOURCES=$(wildcard *.m)
+OBJECTS=$(SOURCES:.m=.o)
 
-all: libgraph64.dylib
-test: simple_graphics
+.PHONY: all clean
 
-libgraph64.dylib:
-	clang -framework AppKit --shared -o libgraph64osx.dylib graph64osx.m
+all: $(LIBRARY)
 
-simple_graphics:
-	clang -o simple_graphics -L. -lgraph64osx simple_graphics.c
+$(LIBRARY): $(OBJECTS)
+	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
+
+.m.o:
+	$(CC) $(CCFLAGS) $<
+
+clean:
+	-rm -rf $(OBJECTS) $(LIBRARY)
