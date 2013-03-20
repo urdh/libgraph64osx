@@ -5,7 +5,7 @@
 #import <AppKit/NSWindow.h>
 #import "defs.h"
 
-NSAutoreleasePool* G64XPool;
+NSAutoreleasePool* gPool;
 NSWindow* gWindow;
 CGContextRef gContext;
 int gWidth, gHeight;
@@ -24,7 +24,7 @@ void OpenWindow(int width, int height)
 {
   assert(width > 0 && height > 0);
   gWidth = width; gHeight = height;
-  NSAutoreleasePool* G64XPool = [[NSAutoreleasePool alloc] init];
+  NSAutoreleasePool* gPool = [[NSAutoreleasePool alloc] init];
   [NSApplication sharedApplication];
   [NSApp finishLaunching];
   gWindow = [[[NSWindow alloc] initWithContentRect:NSMakeRect(0, 0, gWidth, gHeight)
@@ -39,7 +39,7 @@ void CloseWindow()
   NSNotificationCenter *c = [NSNotificationCenter defaultCenter];
   [c addObserver:[G64XQuitApp alloc] selector:@selector(quitApp:) name:NSWindowWillCloseNotification object:gWindow];
   [NSApp run];
-  [G64XPool release];
+  [gPool release];
 }
 
 void FlushWindow()
