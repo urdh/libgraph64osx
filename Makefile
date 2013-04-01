@@ -13,7 +13,7 @@ all: $(LIBRARY)
 $(LIBRARY): $(OBJECTS)
 	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
 
-.m.o:
+%.o: %.m
 	$(CC) $(CCFLAGS) $<
 
 clean:
