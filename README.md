@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/urdh/libgraph64osx.png)](https://travis-ci.org/urdh/libgraph64osx)
+
 **Note:** This is essentially a reverse-engineered API-compatible OS X (Quartz/Cocoa) variant of the [libgraph64](http://www.math.chalmers.se/Math/Grundutb/CTH/tma881/1213/Assignments/THREADS/graphics.html) graphics library used in the High Performance Computing course given at Chalmers University of Technology. This is therefore basically a verbatim transcription of the desciption of that library, sans the (sort of irrelevant) X library text. Also somewhat relevant is [the license](LICENSE.md).
 
 # A small graphics package
