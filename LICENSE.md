@@ -1,4 +1,4 @@
-    Copyright (c) 2013, Simon Sigurdhsson <ssimon@student.chalmers.se>
+    Copyright (c) 2015, Simon Sigurdhsson <Sigurdhsson@gmail.com>
 
     Permission to use, copy, modify, and/or distribute this software for
     any purpose with or without fee is hereby granted, provided that the
